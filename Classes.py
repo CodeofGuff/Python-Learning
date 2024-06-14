@@ -108,3 +108,10 @@ class Circle:
     print(f"New circle with diameter: {diameter}")
 
 teaching_table = Circle("36")
+
+
+
+
+
+# Instance variables and class variables are both accessed similarly in Python.
+#  they are both considered attributes of an object.
