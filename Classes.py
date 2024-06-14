@@ -114,4 +114,150 @@ teaching_table = Circle("36")
 
 
 # Instance variables and class variables are both accessed similarly in Python.
-#  they are both considered attributes of an object.
+# They are both considered attributes of an object.
+
+
+
+class NoCustomAttributes:
+  pass
+
+attributeless = NoCustomAttributes()
+
+try:
+  attributeless.fake_attribute
+except AttributeError:
+  print("This text gets printed!")
+
+# prints "This text gets printed!"
+
+
+hasattr(attributeless, "fake_attribute") # will return True if an object has a given attribute and False otherwise
+# returns False
+
+getattr(attributeless, "other_fake_attribute", 800) #  will return the value of a given object and attribute.
+# returns 800, the default value
+
+# .count() examples of which elemnts have it
+can_we_count_it = [{'s': False}, "sassafrass", 18, ["a", "c", "s", "d", "s"]]
+
+for element in can_we_count_it:
+  if hasattr(element, "count"):
+    print(str(type(element)) + " has the count attribute!")
+  else:
+    print(str(type(element)) + " does not have the count attribute :(")
+
+# dictionaries and integers both do not have a .count attribute, while strings and lists do. 
+
+
+
+# Self
+# This is the strength of writing object-oriented programs. 
+# We can write our classes to structure the data that we need and write methods 
+# that will interact with that data in a meaningful way.
+
+# use self to refer to class and instance variables in a method.
+
+class Circle:
+  pi = 3.14
+  def __init__(self, diameter):
+    print("Creating circle with diameter {d}".format(d=diameter))
+    self.radius = diameter / 2
+
+  def circumference(self):
+    return 2 * self.pi * self.radius
+  
+medium_pizza = Circle(12)
+teaching_table = Circle(36)
+round_room = Circle(11460)
+
+print(medium_pizza.circumference())
+print(teaching_table.circumference())
+print(round_room.circumference())
+
+
+# We can use the dir() function to investigate an object’s attributes at runtime. 
+# dir() is short for directory and offers an organized presentation of object attributes.
+
+class FakeDict:
+  pass
+
+fake_dict = FakeDict()
+fake_dict.attribute = "Cool"
+
+print(dir(fake_dict))
+# Prints ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
+# '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__()', '__init_subclass__', '__le__', 
+# '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', 
+# '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'attribute']
+
+
+# Everything is an object
+# Their classes are int, float, str, list, and dict. 
+# Have special syntax for instantiation, 1, 1.0, "hello", [], and {} 
+
+fun_list = [10, "string", {'abc': True}]
+type(fun_list)
+# Prints <class 'list'>
+print(dir(fun_list))
+# Prints ['__add__', '__class__', [...], 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+
+
+# __repr__() This is a method we can use to tell 
+# Python what we want the string representation of the class to be. 
+# __repr__() can only have one parameter, self, and must return a string.
+class Employee():
+  def __init__(self, name):
+    self.name = name
+
+argus = Employee("Argus Filch")
+print(argus)
+# prints "<__main__.Employee object at 0x104e88390>"
+
+class Employee():
+  def __init__(self, name):
+    self.name = name
+
+  def __repr__(self): #implemented repr and it returned the actual str value
+    return self.name
+
+argus = Employee("Argus Filch")
+print(argus)
+# prints "Argus Filch"
+
+
+class Circle:
+  pi = 3.14
+  
+  def __init__(self, diameter):
+    self.radius = diameter / 2
+ 
+  def __repr__(self):   #Added repr and now prints the proper string
+    return f"Circle with radius {self.radius}" 
+
+  def area(self):
+    return self.pi * self.radius ** 2
+  
+  def circumference(self):
+    return self.pi * 2 * self.radius
+  
+medium_pizza = Circle(12)
+teaching_table = Circle(36)
+round_room = Circle(11460)
+
+
+print(medium_pizza)
+print(teaching_table)
+print(round_room)
+
+
+
+class User:
+  def __init__(self, name):
+    self.name = name
+    
+  def __repr__(self):
+    return f"Hiya {self.name}!"
+  
+devorah = User("Devorah")
+print(devorah)
